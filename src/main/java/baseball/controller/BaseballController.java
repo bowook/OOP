@@ -35,6 +35,7 @@ public class BaseballController {
             boolean endFlag = outputView.printMessage(baseball.compare(Conversion.stringToList(userInput)));
 
             while(endFlag) {
+                outputView.endMessage();
                 userInput = inputView.readCommandNumbers();
                 int commandType = Validate.commandValidator(userInput);
                 if(commandType == 1) {
