@@ -21,6 +21,7 @@ public class InputView {
 
     public String readCommandNumbers() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("게임을 새로 시작혀려면 1, 종료하려면 2를 입력하세요.");
         String input = "";
         try {
             input = br.readLine();

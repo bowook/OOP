@@ -1,6 +1,8 @@
 package baseball.controller;
 
 import baseball.domain.Baseball;
+import baseball.service.Conversion;
+import baseball.service.Validate;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 
@@ -17,14 +19,32 @@ public class BaseballController {
     }
     public void run() {
         baseball.computerNumbersGenerator();
+        play();
     }
 
     public void play() {
-        String userInput = inputView.readBaseballNumbers();
-    }
+        while (true) {
+            String userInput = inputView.readBaseballNumbers();
 
-    public void reset() {
+            boolean validateFlag = Validate.validator(userInput);
 
+            if(!validateFlag) {
+                break;
+            }
+
+            boolean endFlag = outputView.printMessage(baseball.compare(Conversion.stringToList(userInput)));
+
+            while(endFlag) {
+                userInput = inputView.readCommandNumbers();
+                int commandType = Validate.commandValidator(userInput);
+                if(commandType == 1) {
+                    break;
+                }
+                else if(commandType == 2) {
+                    return;
+                }
+            }
+        }
     }
 
 }
