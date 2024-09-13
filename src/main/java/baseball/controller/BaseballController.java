@@ -13,10 +13,18 @@ public class BaseballController {
         this.baseball = new Baseball();
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        outputView.startMessage();
     }
     public void run() {
-        outputView.startMessage();
         baseball.computerNumbersGenerator();
+    }
+
+    public void play() {
+        String userInput = inputView.readBaseballNumbers();
+    }
+
+    public void reset() {
+
     }
 
 }
