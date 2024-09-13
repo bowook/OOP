@@ -26,8 +26,14 @@ public class BaseballController {
         while (true) {
             String userInput = inputView.readBaseballNumbers();
 
-            boolean validateFlag = Validate.validator(userInput);
+            boolean validateFlag;
 
+            try {
+                validateFlag = Validate.validator(userInput);
+            } catch (IllegalArgumentException e) {
+                // 예외가 발생하면 메시지를 출력하고 루프를 계속합니다.
+                validateFlag = false;
+            }
             if(!validateFlag) {
                 break;
             }
@@ -39,7 +45,8 @@ public class BaseballController {
                 userInput = inputView.readCommandNumbers();
                 int commandType = Validate.commandValidator(userInput);
                 if(commandType == 1) {
-                    break;
+                    run();
+                    return;
                 }
                 else if(commandType == 2) {
                     return;
