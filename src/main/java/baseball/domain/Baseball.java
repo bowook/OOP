@@ -17,6 +17,7 @@ public class Baseball {
 
     public void computerNumbersGenerator() {
         computerBaseballNumbers = BaseballNumberGenerator.generator();
+        System.out.println(computerBaseballNumbers);
     }
 
     public String compare(List<Integer> convertedNumbers) {
