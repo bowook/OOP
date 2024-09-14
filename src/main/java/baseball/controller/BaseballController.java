@@ -18,24 +18,19 @@ public class BaseballController {
         outputView.startMessage();
     }
     public void run() {
-        baseball.computerNumbersGenerator();
-        play();
+        boolean isRunning = true;
+        while (isRunning) {
+            isRunning = play();
+        }
     }
 
-    public void play() {
+    public boolean play() {
+        baseball.computerNumbersGenerator();
         while (true) {
             String userInput = inputView.readBaseballNumbers();
 
-            boolean validateFlag;
-
-            try {
-                validateFlag = Validate.validator(userInput);
-            } catch (IllegalArgumentException e) {
-                // 예외가 발생하면 메시지를 출력하고 루프를 계속합니다.
-                validateFlag = false;
-            }
-            if(!validateFlag) {
-                break;
+            if (!Validate.validator(userInput)) {
+                throw new IllegalArgumentException(); // 예외 발생
             }
 
             boolean endFlag = outputView.printMessage(baseball.compare(Conversion.stringToList(userInput)));
@@ -45,14 +40,12 @@ public class BaseballController {
                 userInput = inputView.readCommandNumbers();
                 int commandType = Validate.commandValidator(userInput);
                 if(commandType == 1) {
-                    run();
-                    return;
+                    return true;
                 }
                 else if(commandType == 2) {
-                    return;
+                    return false;
                 }
             }
         }
     }
-
 }

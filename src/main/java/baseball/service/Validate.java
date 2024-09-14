@@ -7,19 +7,16 @@ public class Validate {
 
     public static boolean validator(String userInput) {
         if (userInput == null || userInput.isBlank()) {
-            throw new IllegalArgumentException("중복되지 않는 3자리의 수를 입력해주세요.");
-        }
-        if (userInput.length() != 3) {
-            throw new IllegalArgumentException("3자리의 수를 입력해주세요.");
-        }
-        if (!userInput.matches("\\d+")) {
-            throw new IllegalArgumentException("숫자만 입력해주세요.");
-        }
-        if (!hasUniqueDigits(userInput)) {
-            throw new IllegalArgumentException("숫자만 입력해주세요.");
+            return false;
+        } else if (!userInput.matches("\\d+")) {
+            return false;
+        } else if (userInput.length() != 3) {
+            return false;
+        } else if (!hasUniqueDigits(userInput)) {
+            return false;
         }
 
-        return true; // 모든 검증을 통과하면 true 반환
+        return true;
     }
 
 
